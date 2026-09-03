@@ -16,9 +16,8 @@ export default function FloatingLogo() {
 
 		gsap.to(logoRef.current, {
 			scrollTrigger: {
-				trigger: document.body,
-				start: "top -80%", // Show after scrolling down 80% of the viewport
-				end: "bottom bottom",
+				trigger: "#hero-section",
+				start: "bottom 20%", // Show when you've scrolled past 80% of the hero section
 				toggleActions: "play none none reverse",
 			},
 			y: 0,

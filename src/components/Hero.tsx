@@ -62,7 +62,7 @@ export default function Hero() {
   }, { scope: container });
 
   return (
-    <section ref={container} id="hero-section" className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+    <section ref={container} id="hero-section" className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-80">
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
           <ambientLight intensity={0.5} />
