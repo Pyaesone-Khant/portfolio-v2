@@ -10,6 +10,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pyaesone Khant | Software Engineer",
   description: "Product-focused Software Engineer building high-performance web and mobile applications.",
+  icons: {
+    icon: "/logos/PK3.svg",
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
