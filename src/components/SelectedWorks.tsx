@@ -2,6 +2,12 @@
 
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
 	{
@@ -61,23 +67,48 @@ const projects = [
 ];
 
 export default function SelectedWorks() {
+	const container = useRef<HTMLDivElement>(null);
+	const title = "Recent Works";
+
+	useGSAP(() => {
+		gsap.from(".works-word", {
+			scrollTrigger: {
+				trigger: container.current,
+				start: "top 80%",
+			},
+			y: "120%",
+			opacity: 0,
+			rotationZ: 10,
+			duration: 0.8,
+			stagger: 0.1,
+			ease: "power4.out",
+		});
+	}, { scope: container });
+
 	return (
 		<section
+			ref={container}
 			id="works-section"
 			className="min-h-screen w-full bg-zinc-950 text-white relative py-24 md:py-32"
 		>
 			<div className="max-w-7xl mx-auto w-full px-4 md:px-12 mb-16 md:mb-24">
-				<h2 className="text-4xl md:text-6xl font-bold tracking-tighter">
-					Recent Works
+				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
+					{title.split(" ").map((word, i) => (
+						<span key={i} className="overflow-hidden inline-flex pb-2">
+							<span className="works-word inline-block origin-bottom-left">
+								{word}
+							</span>
+						</span>
+					))}
 				</h2>
 			</div>
 
-			<div className="flex flex-col w-full max-w-7xl mx-auto px-4 md:px-12 gap-8 md:gap-12 pb-32">
+			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-32">
 				{projects.map((project, index) => {
 					return (
 						<div
 							key={index}
-							className="project-card sticky w-full flex items-center justify-center transition-all duration-700"
+							className="project-card sticky w-full mb-12 md:mb-24 last:mb-0"
 							style={{ 
 								top: `calc(15vh + ${index * 40}px)`, 
 								zIndex: index + 1 
