@@ -6,6 +6,9 @@ import { User, Briefcase, Mail, Home } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 const navItems = [
 	{ id: "hero", icon: Home, selector: "#hero-section" },
 	{ id: "about", icon: User, selector: "#about-section" },
@@ -26,40 +29,17 @@ export default function FloatingNav() {
 			ease: "power4.out",
 			delay: 2, // Wait for hero animations
 		});
-	}, []);
 
-	useEffect(() => {
-
-		const observerOptions = {
-			root: null,
-			rootMargin: "-45% 0px -45% 0px", // Trigger when section is near the vertical center
-			threshold: 0,
-		};
-
-		const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					// Find which nav item corresponds to this intersecting element
-					const match = navItems.find((item) => item.selector.substring(1) === entry.target.id);
-					if (match) {
-						setActiveId(match.id);
-					}
-				}
-			});
-		};
-
-		const observer = new IntersectionObserver(handleIntersect, observerOptions);
-
+		// Track active section precisely with ScrollTrigger
 		navItems.forEach((item) => {
-			const element = document.querySelector(item.selector);
-			if (element) {
-				observer.observe(element);
-			}
+			ScrollTrigger.create({
+				trigger: item.selector,
+				start: "top center",
+				end: "bottom center",
+				onEnter: () => setActiveId(item.id),
+				onEnterBack: () => setActiveId(item.id),
+			});
 		});
-
-		return () => {
-			observer.disconnect();
-		};
 	}, []);
 
 	const scrollTo = (selector: string) => {

@@ -33,7 +33,7 @@ export default function Footer() {
 		<footer
 			ref={containerRef}
 			id="footer-section"
-			className="relative min-h-[80vh] flex flex-col items-center justify-between bg-black text-white overflow-hidden pt-32 pb-8 rounded-t-[3rem] border-t border-zinc-800/50"
+			className="relative min-h-[80vh] flex flex-col items-center justify-between bg-black text-white overflow-hidden pt-32 pb-8 rounded-t-[3rem] border-t border-zinc-800/50 z-20"
 		>
 			<div className="max-w-7xl w-full px-4 md:px-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 z-10">
 				<div className="flex-1">

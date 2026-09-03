@@ -83,26 +83,13 @@ export default function SelectedWorks() {
 			stagger: 0.1,
 			ease: "power4.out",
 		});
-
-		// GSAP Pinning for stacked cards (perfectly syncs with Lenis)
-		const cards = gsap.utils.toArray<HTMLElement>(".project-card");
-		cards.forEach((card, index) => {
-			ScrollTrigger.create({
-				trigger: card,
-				start: `top ${15 + index * 5}vh`, // Stack them with dynamic offset
-				endTrigger: container.current,
-				end: `bottom ${15 + index * 5}vh`,
-				pin: true,
-				pinSpacing: false,
-			});
-		});
 	}, { scope: container });
 
 	return (
 		<section
 			ref={container}
 			id="works-section"
-			className="min-h-screen w-full bg-black text-white relative py-24 md:py-32"
+			className="min-h-screen w-full bg-black text-white relative py-24 md:py-32 z-10"
 		>
 			<div className="max-w-7xl mx-auto w-full px-4 md:px-12 mb-16 md:mb-24">
 				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
@@ -116,13 +103,17 @@ export default function SelectedWorks() {
 				</h2>
 			</div>
 
-			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-32">
+			{/* Added massive pb-[70vh] so the sticky stack persists on screen before footer scrolls in */}
+			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-[70vh] relative">
 				{projects.map((project, index) => {
 					return (
 						<div
 							key={index}
-							className="project-card w-full mb-12 md:mb-24 last:mb-0"
-							style={{ zIndex: index + 1 }}
+							className="project-card sticky w-full mb-12 md:mb-24"
+							style={{ 
+								top: `calc(15vh + ${index * 40}px)`, 
+								zIndex: index + 1 
+							}}
 						>
 							<a
 								href={project.url}
