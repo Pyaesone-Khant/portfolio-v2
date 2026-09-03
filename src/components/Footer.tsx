@@ -44,15 +44,16 @@ export default function Footer() {
 						</span>
 					</h2>
 					<p className="footer-stagger text-xl text-zinc-400 max-w-md">
-						I&apos;m always open to discussing frontend architecture,
-						creative coding, or partnership opportunities.
+						I&apos;m always open to discussing software
+						architecture, creative coding, or partnership
+						opportunities.
 					</p>
 				</div>
 
 				<div className="footer-stagger flex flex-col sm:flex-row items-start lg:items-end gap-4 w-full lg:w-auto">
 					<MagneticButton
 						href="mailto:pyaesonekhant.dev@gmail.com"
-						className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-none px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-bold tracking-wide rounded-full group shadow-2xl shadow-white/10"
+						className="w-full sm:w-auto bg-white text-black hover:bg-transparent px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-bold tracking-wide rounded-full group shadow-2xl shadow-white/10 transition-all duration-200"
 					>
 						<div className="flex items-center justify-center gap-3 w-full">
 							<Mail
@@ -89,7 +90,7 @@ export default function Footer() {
 
 					<div className="flex items-center gap-8">
 						<a
-							href="https://linkedin.com/in/pyaesonekhant"
+							href="https://linkedin.com/in/pyaesone-khant"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 group"
