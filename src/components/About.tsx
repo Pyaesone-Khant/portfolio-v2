@@ -44,7 +44,7 @@ export default function About() {
   const iconClass = "text-4xl text-zinc-400 hover:text-white transition-colors mx-4";
 
   return (
-    <section ref={container} className="min-h-screen py-24 px-4 md:px-12 max-w-7xl mx-auto bento-container">
+    <section id="about-section" ref={container} className="min-h-screen py-24 px-4 md:px-12 max-w-7xl mx-auto bento-container">
       <h2 className="text-3xl md:text-5xl font-semibold mb-12 tracking-tight">About & Expertise</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
