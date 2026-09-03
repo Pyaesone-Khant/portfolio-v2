@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import { cn } from "@/lib/utils";
+
 
 export default function FloatingLogo() {
 	const logoRef = useRef<HTMLDivElement>(null);

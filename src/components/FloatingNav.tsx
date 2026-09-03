@@ -29,7 +29,7 @@ export default function FloatingNav() {
 	}, []);
 
 	useEffect(() => {
-		const observers: IntersectionObserver[] = [];
+
 		const observerOptions = {
 			root: null,
 			rootMargin: "-45% 0px -45% 0px", // Trigger when section is near the vertical center

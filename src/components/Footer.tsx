@@ -44,7 +44,7 @@ export default function Footer() {
 						</span>
 					</h2>
 					<p className="footer-stagger text-xl text-zinc-400 max-w-md">
-						I'm always open to discussing frontend architecture,
+						I&apos;m always open to discussing frontend architecture,
 						creative coding, or partnership opportunities.
 					</p>
 				</div>

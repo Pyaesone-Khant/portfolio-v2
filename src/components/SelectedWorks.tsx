@@ -73,7 +73,7 @@ export default function SelectedWorks() {
 			if (!wrapper) return;
 
 			// Use matchMedia to only apply the horizontal scroll on desktop
-			let mm = gsap.matchMedia();
+			const mm = gsap.matchMedia();
 
 			mm.add("(min-width: 768px)", () => {
 				// Horizontal scroll animation
