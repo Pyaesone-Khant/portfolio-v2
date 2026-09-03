@@ -1,53 +1,49 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, MeshDistortMaterial } from '@react-three/drei';
-import { useRef } from 'react';
-import * as THREE from 'three';
-
-function AbstractShape() {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    
-    // Slow passive rotation
-    meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
-    meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
-    
-    // Gentle mouse interaction
-    const targetX = (state.pointer.x * Math.PI) / 4;
-    const targetY = (state.pointer.y * Math.PI) / 4;
-    meshRef.current.rotation.x += 0.05 * (targetY - meshRef.current.rotation.x);
-    meshRef.current.rotation.y += 0.05 * (targetX - meshRef.current.rotation.y);
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-      <mesh ref={meshRef} scale={1.5}>
-        <icosahedronGeometry args={[1, 0]} />
-        <MeshDistortMaterial
-          color="#3f3f46"
-          emissive="#18181b"
-          roughness={0.2}
-          metalness={0.8}
-          distort={0.4}
-          speed={2}
-          wireframe
-        />
-      </mesh>
-    </Float>
-  );
-}
+import { useRef, useEffect } from 'react';
 
 export default function Bento3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const orbRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const orb = orbRef.current;
+    if (!container || !orb) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      // Move orb to mouse position smoothly
+      orb.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    };
+
+    container.addEventListener('mousemove', handleMouseMove);
+    return () => container.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-0 opacity-30 pointer-events-none group-hover:opacity-100 transition-opacity duration-700">
-      <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 10]} intensity={2} />
-        <AbstractShape />
-      </Canvas>
+    <div 
+      ref={containerRef}
+      className="absolute inset-0 z-0 overflow-hidden pointer-events-auto bg-zinc-900"
+    >
+      {/* Grid Pattern Background */}
+      <div className="absolute inset-0 opacity-[0.15]" 
+           style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} 
+      />
+      
+      {/* Interactive Glowing Orb */}
+      <div 
+        ref={orbRef}
+        className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-blue-500/30 blur-[60px] transition-opacity duration-500 opacity-50 group-hover:opacity-100 mix-blend-screen pointer-events-none"
+        style={{ transform: 'translate(-50%, -50%)' }}
+      />
+
+      {/* Abstract geometric shapes (pure CSS) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-zinc-700/50 rounded-full animate-[spin_10s_linear_infinite]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-dashed border-zinc-700/30 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
     </div>
   );
 }
