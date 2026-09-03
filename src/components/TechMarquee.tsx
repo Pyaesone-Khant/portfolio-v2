@@ -16,10 +16,10 @@ export default function TechMarquee({
   speed = 'normal',
   reverse = false
 }: TechMarqueeProps) {
-  const speedClass = {
-    fast: 'duration-[15s]',
-    normal: 'duration-[25s]',
-    slow: 'duration-[40s]',
+  const duration = {
+    fast: '15s',
+    normal: '25s',
+    slow: '40s',
   }[speed];
 
   const directionClass = reverse ? 'reverse' : 'normal';
@@ -27,15 +27,18 @@ export default function TechMarquee({
   return (
     <div className={cn("relative flex w-full overflow-hidden mask-horizontal", className)}>
       <div 
-        className={cn("flex w-max min-w-full animate-marquee", speedClass)}
-        style={{ animationDirection: directionClass }}
+        className={cn("flex w-max min-w-full animate-marquee")}
+        style={{ 
+          animationDirection: directionClass,
+          animationDuration: duration
+        }}
       >
-        {children}
-        {children}
-        {children}
-        {children}
-        {children}
-        {children}
+        <div className="flex gap-4 px-2">{children}</div>
+        <div className="flex gap-4 px-2">{children}</div>
+        <div className="flex gap-4 px-2">{children}</div>
+        <div className="flex gap-4 px-2">{children}</div>
+        <div className="flex gap-4 px-2">{children}</div>
+        <div className="flex gap-4 px-2">{children}</div>
       </div>
     </div>
   );

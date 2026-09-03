@@ -1,17 +1,28 @@
 'use client';
 
-import { useRef } from 'react';
-import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import TechMarquee from './TechMarquee';
-import { 
-  SiTypescript, SiReact, SiNextdotjs, SiElectron, SiTauri, SiRedux, 
-  SiNodedotjs, SiNestjs, SiRust, SiExpress,
-  SiGooglecloud, SiDigitalocean, SiDocker,
-  SiPostgresql, SiMysql, SiMongodb
-} from 'react-icons/si';
+import gsap from 'gsap';
+import { useRef } from 'react';
 import { FaAws } from 'react-icons/fa';
+import {
+  SiDigitalocean, SiDocker,
+  SiElectron,
+  SiExpress,
+  SiGooglecloud,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiReact,
+  SiRedux,
+  SiRust,
+  SiTauri,
+  SiTypescript
+} from 'react-icons/si';
 import { VscVscodeInsiders } from 'react-icons/vsc'; // Using as a proxy for Cursor/AI IDE
+import TechMarquee from './TechMarquee';
 
 export default function About() {
   const container = useRef<HTMLDivElement>(null);
@@ -39,7 +50,7 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
         {/* Frontend Architecture */}
         <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
-          <div className="absolute top-8 left-0 right-0">
+          <div className="absolute top-8 left-0 right-0 z-10">
             <TechMarquee speed="normal">
               <SiTypescript className={iconClass} />
               <SiReact className={iconClass} />
