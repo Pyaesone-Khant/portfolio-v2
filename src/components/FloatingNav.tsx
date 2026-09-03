@@ -29,31 +29,37 @@ export default function FloatingNav() {
 	}, []);
 
 	useEffect(() => {
-		const handleScroll = () => {
-			const sections = navItems.map((item) => {
-				const element = document.querySelector(item.selector) as HTMLElement;
-				if (!element) return { id: item.id, top: 0, bottom: 0 };
-				const rect = element.getBoundingClientRect();
-				return { id: item.id, top: rect.top, bottom: rect.bottom };
-			});
-
-			// We check which section spans across the vertical center of the screen
-			const viewportCenter = window.innerHeight / 2;
-
-			const activeSection = sections.find(
-				(section) => section.top <= viewportCenter && section.bottom >= viewportCenter
-			);
-
-			if (activeSection) {
-				setActiveId(activeSection.id);
-			}
+		const observers: IntersectionObserver[] = [];
+		const observerOptions = {
+			root: null,
+			rootMargin: "-45% 0px -45% 0px", // Trigger when section is near the vertical center
+			threshold: 0,
 		};
 
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		// Initial check
-		handleScroll();
+		const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					// Find which nav item corresponds to this intersecting element
+					const match = navItems.find((item) => item.selector.substring(1) === entry.target.id);
+					if (match) {
+						setActiveId(match.id);
+					}
+				}
+			});
+		};
 
-		return () => window.removeEventListener("scroll", handleScroll);
+		const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+		navItems.forEach((item) => {
+			const element = document.querySelector(item.selector);
+			if (element) {
+				observer.observe(element);
+			}
+		});
+
+		return () => {
+			observer.disconnect();
+		};
 	}, []);
 
 	const scrollTo = (selector: string) => {
