@@ -47,9 +47,9 @@ export default function Footer() {
 			id="footer-section"
 			className="relative min-h-[80vh] flex flex-col items-center justify-between bg-black text-white overflow-hidden pt-32 pb-8 rounded-t-[3rem] border-t border-zinc-800/50"
 		>
-			<div className="max-w-7xl w-full px-4 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 z-10">
+			<div className="max-w-7xl w-full px-4 md:px-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 z-10">
 				<div className="flex-1">
-					<h2 className="footer-stagger text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+					<h2 className="footer-stagger text-5xl lg:text-7xl font-extrabold tracking-tight mb-6">
 						Ready to build <br />
 						<span className="text-zinc-500">
 							something innovative?
@@ -61,7 +61,7 @@ export default function Footer() {
 					</p>
 				</div>
 
-				<div className="footer-stagger flex flex-col sm:flex-row items-start md:items-end gap-4 w-full md:w-auto">
+				<div className="footer-stagger flex flex-col sm:flex-row items-start lg:items-end gap-4 w-full lg:w-auto">
 					<MagneticButton
 						href="mailto:pyaesonekhant.dev@gmail.com"
 						className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-none px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-bold tracking-wide rounded-full group shadow-2xl shadow-white/10"

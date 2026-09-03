@@ -146,7 +146,7 @@ export default function SelectedWorks() {
 					return (
 						<div
 							key={index}
-							className="project-card w-full md:w-[50vw] max-w-3xl md:h-full shrink-0 flex items-center md:mr-16"
+							className="project-card w-full md:w-[65vw] lg:w-[50vw] max-w-3xl md:h-full shrink-0 flex items-center md:mr-12 lg:mr-16"
 						>
 							<a
 								href={project.url}

@@ -48,9 +48,9 @@ export default function About() {
     <section id="about-section" ref={container} className="min-h-screen py-24 px-4 md:px-12 max-w-7xl mx-auto bento-container">
       <h2 className="text-3xl md:text-5xl font-semibold mb-12 tracking-tight">About & Expertise</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[250px]">
         {/* Frontend Architecture */}
-        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 lg:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
           <div className="absolute top-8 left-0 right-0 z-10">
             <TechMarquee speed="normal">
               <SiTypescript className={iconClass} />
@@ -101,7 +101,7 @@ export default function About() {
         </div>
 
         {/* Databases & Workflow */}
-        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 lg:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
           <div className="absolute top-8 left-0 right-0">
             <TechMarquee speed="normal" reverse>
               <SiPostgresql className={iconClass} />

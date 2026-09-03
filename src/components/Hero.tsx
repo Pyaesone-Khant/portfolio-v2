@@ -72,11 +72,11 @@ export default function Hero() {
         </Canvas>
       </div>
       
-      <div className="z-10 text-center flex flex-col items-center max-w-4xl px-4">
-        <h1 className="hero-text text-5xl md:text-8xl font-bold tracking-tighter text-balance">
+      <div className="z-10 text-center flex flex-col items-center max-w-4xl px-4 mt-16 md:mt-0">
+        <h1 className="hero-text text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance px-2">
           Hi, I'm <span className="animate-basic-color inline-block">Pyaesone Khant</span>
         </h1>
-        <p className="hero-text mt-6 text-xl md:text-2xl text-zinc-400 max-w-2xl font-light">
+        <p className="hero-text mt-6 text-lg md:text-xl lg:text-2xl text-zinc-400 max-w-2xl font-light px-4">
           A product-focused Software Engineer transforming ambiguous needs into high-performance, scalable solutions.
         </p>
         
