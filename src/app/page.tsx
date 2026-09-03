@@ -1,69 +1,114 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { Canvas } from '@react-three/fiber';
+import { Environment, MeshTransmissionMaterial, Float } from '@react-three/drei';
+
+function HeroShape() {
+  return (
+    <Float floatIntensity={2} rotationIntensity={0.5} speed={2}>
+      <mesh>
+        <torusKnotGeometry args={[1, 0.3, 128, 32]} />
+        <MeshTransmissionMaterial 
+          thickness={0.5}
+          roughness={0.1}
+          transmission={1}
+          ior={1.5}
+          chromaticAberration={0.1}
+          backside
+        />
+      </mesh>
+    </Float>
+  );
+}
 
 export default function Home() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Basic entrance animation
+    const tl = gsap.timeline();
+    tl.from('.hero-text', {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: 'power4.out',
+      delay: 0.2
+    });
+
+    // Scroll triggered animation for Bento box
+    gsap.from('.bento-item', {
+      scrollTrigger: {
+        trigger: '.bento-container',
+        start: 'top 80%',
+      },
+      y: 100,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out'
+    });
+  }, { scope: container });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div ref={container} className="w-full">
+      {/* Hero Section */}
+      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-80">
+          <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 10]} intensity={1} />
+            <HeroShape />
+            <Environment preset="city" />
+          </Canvas>
+        </div>
+        
+        <div className="z-10 text-center flex flex-col items-center max-w-4xl px-4">
+          <h1 className="hero-text text-5xl md:text-8xl font-bold tracking-tighter text-balance">
+            Hi, I'm <span className="text-zinc-500">Pyaesone Khant</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="hero-text mt-6 text-xl md:text-2xl text-zinc-400 max-w-2xl font-light">
+            I craft minimalist, innovative digital experiences using modern web technologies.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+      </section>
+
+      {/* Bento Box About Section */}
+      <section className="min-h-screen py-24 px-4 md:px-12 max-w-7xl mx-auto bento-container">
+        <h2 className="text-3xl md:text-5xl font-semibold mb-12 tracking-tight">About & Expertise</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+          <div className="bento-item col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-2xl font-medium">Frontend Engineering</h3>
+            <p className="text-zinc-500 mt-2">Specializing in React, Next.js, and complex interactive UIs.</p>
+          </div>
+          <div className="bento-item col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-2xl font-medium">Animations</h3>
+            <p className="text-zinc-500 mt-2">Bringing interfaces to life with GSAP.</p>
+          </div>
+          <div className="bento-item col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-2xl font-medium">Creative Coding</h3>
+            <p className="text-zinc-500 mt-2">Exploring 3D space with WebGL & R3F.</p>
+          </div>
+          <div className="bento-item col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+            <h3 className="text-2xl font-medium">Minimalist Design</h3>
+            <p className="text-zinc-500 mt-2">Focusing on what matters. Stripping away the noise.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer / Contact Placeholder */}
+      <section className="h-[50vh] flex items-center justify-center bg-zinc-950 text-zinc-50">
+        <div className="text-center">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Let's build something.</h2>
+          <a href="mailto:hello@example.com" className="text-xl underline decoration-zinc-700 underline-offset-4 hover:decoration-zinc-300 transition-colors">
+            Get in touch
           </a>
         </div>
-      </main>
+      </section>
     </div>
   );
 }
