@@ -7,9 +7,10 @@ import TechMarquee from './TechMarquee';
 import { 
   SiTypescript, SiReact, SiNextdotjs, SiElectron, SiTauri, SiRedux, 
   SiNodedotjs, SiNestjs, SiRust, SiExpress,
-  SiAmazonwebservices, SiGooglecloud, SiDigitalocean, SiDocker,
+  SiGooglecloud, SiDigitalocean, SiDocker,
   SiPostgresql, SiMysql, SiMongodb
 } from 'react-icons/si';
+import { FaAws } from 'react-icons/fa';
 import { VscVscodeInsiders } from 'react-icons/vsc'; // Using as a proxy for Cursor/AI IDE
 
 export default function About() {
@@ -74,7 +75,7 @@ export default function About() {
         <div className="bento-item relative overflow-hidden col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
           <div className="absolute top-8 left-0 right-0">
             <TechMarquee speed="fast">
-              <SiAmazonwebservices className={iconClass} />
+              <FaAws className={iconClass} />
               <SiGooglecloud className={iconClass} />
               <SiDigitalocean className={iconClass} />
               <SiDocker className={iconClass} />
