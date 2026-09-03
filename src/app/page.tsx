@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import About from '@/components/About';
+import SelectedWorks from '@/components/SelectedWorks';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div className="w-full">
       <Hero />
       <About />
+      <SelectedWorks />
       <Footer />
     </div>
   );
