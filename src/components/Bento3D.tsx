@@ -4,7 +4,8 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Draggable } from 'gsap/Draggable';
-import { SiReact, SiNextdotjs, SiTypescript, SiRust, SiNodedotjs, SiTailwindcss, SiNestjs } from "react-icons/si";
+import { SiReact, SiNextdotjs, SiTypescript, SiRust, SiNodedotjs, SiNestjs, SiDocker } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(Draggable);
@@ -16,7 +17,9 @@ const techs = [
   { name: "TypeScript", icon: SiTypescript, color: "text-[#3178C6]", bg: "bg-[#3178C6]/10", border: "border-[#3178C6]/30" },
   { name: "Rust", icon: SiRust, color: "text-[#DEA584]", bg: "bg-[#DEA584]/10", border: "border-[#DEA584]/30" },
   { name: "Node.js", icon: SiNodedotjs, color: "text-[#339933]", bg: "bg-[#339933]/10", border: "border-[#339933]/30" },
-  { name: "Tailwind", icon: SiTailwindcss, color: "text-[#06B6D4]", bg: "bg-[#06B6D4]/10", border: "border-[#06B6D4]/30" },
+  { name: "NestJS", icon: SiNestjs, color: "text-[#E0234E]", bg: "bg-[#E0234E]/10", border: "border-[#E0234E]/30" },
+  { name: "AWS", icon: FaAws, color: "text-[#FF9900]", bg: "bg-[#FF9900]/10", border: "border-[#FF9900]/30" },
+  { name: "Docker", icon: SiDocker, color: "text-[#2496ED]", bg: "bg-[#2496ED]/10", border: "border-[#2496ED]/30" },
 ];
 
 export default function Bento3D() {
