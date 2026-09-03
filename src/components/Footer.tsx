@@ -42,23 +42,27 @@ export default function Footer() {
 					</p>
 				</div>
 				
-				<div className="flex flex-col items-start md:items-end gap-6">
-					<a href="mailto:pyaesonekhant.dev@gmail.com">
-						<MagneticButton className="bg-white text-black hover:bg-zinc-200 border-none px-8 py-6 md:px-12 md:py-8 text-lg font-semibold rounded-full group shadow-2xl shadow-white/10">
-							<div className="flex items-center gap-3">
-								<Mail className="group-hover:scale-110 transition-transform" /> 
-								<span>pyaesonekhant.dev@gmail.com</span>
-							</div>
-						</MagneticButton>
-					</a>
-					<a href="/Pyaesone-Khant-CV.pdf" download="Pyaesone-Khant-CV.pdf" className="w-full md:w-auto">
-						<MagneticButton className="w-full bg-transparent border-zinc-700 hover:border-white hover:text-white text-zinc-400 px-8 py-4 text-base rounded-full group">
-							<div className="flex items-center gap-2">
-								<Download size={18} className="group-hover:-translate-y-1 transition-transform" /> 
-								<span>Download Résumé</span>
-							</div>
-						</MagneticButton>
-					</a>
+				<div className="flex flex-col sm:flex-row items-start md:items-end gap-4 w-full md:w-auto">
+					<MagneticButton 
+            href="mailto:pyaesonekhant.dev@gmail.com"
+            className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-none px-6 py-4 md:px-8 md:py-5 text-base font-semibold rounded-full group shadow-2xl shadow-white/10"
+          >
+						<div className="flex items-center justify-center gap-3 w-full">
+							<Mail className="group-hover:scale-110 transition-transform" size={20} /> 
+							<span>Email Me</span>
+						</div>
+					</MagneticButton>
+					
+					<MagneticButton 
+            href="/Pyaesone-Khant-CV.pdf" 
+            download="Pyaesone-Khant-CV.pdf"
+            className="w-full sm:w-auto bg-transparent border-zinc-700 hover:border-white hover:bg-white hover:text-black text-zinc-300 px-6 py-4 md:px-8 md:py-5 text-base font-semibold rounded-full group"
+          >
+						<div className="flex items-center justify-center gap-2 w-full">
+							<Download size={20} className="group-hover:-translate-y-1 transition-transform" /> 
+							<span>Download CV</span>
+						</div>
+					</MagneticButton>
 				</div>
 			</div>
 

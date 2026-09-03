@@ -8,10 +8,12 @@ interface MagneticButtonProps {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
+  href?: string;
+  download?: string;
 }
 
-export default function MagneticButton({ children, className, onClick }: MagneticButtonProps) {
-  const containerRef = useRef<HTMLButtonElement>(null);
+export default function MagneticButton({ children, className, onClick, href, download }: MagneticButtonProps) {
+  const containerRef = useRef<HTMLAnchorElement & HTMLButtonElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -26,7 +28,6 @@ export default function MagneticButton({ children, className, onClick }: Magneti
       const x = clientX - (left + width / 2);
       const y = clientY - (top + height / 2);
       
-      // The pull strength (adjust divisor to make it stronger/weaker)
       xTo(x * 0.4);
       yTo(y * 0.4);
     };
@@ -45,14 +46,29 @@ export default function MagneticButton({ children, className, onClick }: Magneti
     };
   }, []);
 
+  const baseClasses = cn(
+    "relative flex items-center justify-center px-8 py-4 rounded-full border border-zinc-700 hover:border-zinc-300 transition-colors bg-zinc-900/50 backdrop-blur-md text-zinc-300 hover:text-white group",
+    className
+  );
+
+  if (href) {
+    return (
+      <a
+        ref={containerRef}
+        href={href}
+        download={download}
+        className={baseClasses}
+      >
+        <span className="relative z-10 pointer-events-none">{children}</span>
+      </a>
+    );
+  }
+
   return (
     <button
       ref={containerRef}
       onClick={onClick}
-      className={cn(
-        "relative flex items-center justify-center px-8 py-4 rounded-full border border-zinc-700 hover:border-zinc-300 transition-colors bg-zinc-900/50 backdrop-blur-md text-zinc-300 hover:text-white group",
-        className
-      )}
+      className={baseClasses}
     >
       <span className="relative z-10 pointer-events-none">{children}</span>
     </button>
