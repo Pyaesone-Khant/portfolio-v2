@@ -127,7 +127,7 @@ export default function SelectedWorks() {
 				</h2>
 			</div>
 
-			{/* Added massive pb-[70vh] so the sticky stack persists on screen before footer scrolls in */}
+			{/* Added massive pb-[10vh] so the sticky stack persists on screen before footer scrolls in */}
 			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 md:pb-[10vh] pb-[5vh] relative">
 				{projects.map((project, index) => {
 					return (

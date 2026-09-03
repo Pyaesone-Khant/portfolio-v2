@@ -1,10 +1,10 @@
 'use client';
 
-import { useRef } from 'react';
-import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { Environment, Float, MeshTransmissionMaterial } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, MeshTransmissionMaterial, Float } from '@react-three/drei';
+import gsap from 'gsap';
+import { useRef } from 'react';
 import * as THREE from 'three';
 import MagneticButton from './MagneticButton';
 
@@ -25,14 +25,13 @@ function HeroShape() {
   return (
     <Float floatIntensity={2} rotationIntensity={0.5} speed={2}>
       <mesh ref={meshRef}>
-        <torusKnotGeometry args={[1, 0.3, 128, 32]} />
+        <torusKnotGeometry args={[1, 0.3, 64, 16]} />
         <MeshTransmissionMaterial 
           thickness={0.5}
           roughness={0.1}
           transmission={1}
           ior={1.5}
-          chromaticAberration={0.1}
-          backside
+          chromaticAberration={0.05}
         />
       </mesh>
     </Float>
@@ -62,9 +61,9 @@ export default function Hero() {
   }, { scope: container });
 
   return (
-    <section ref={container} id="hero-section" className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-80">
-        <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+    <section ref={container} id="hero-section" className="relative min-h-dvh flex flex-col items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 1.5]}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
           <HeroShape />
