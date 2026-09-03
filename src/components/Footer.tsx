@@ -25,18 +25,6 @@ export default function Footer() {
 				scale: 0.9,
 				ease: "power3.out",
 			});
-
-			gsap.from(".footer-stagger", {
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 75%",
-				},
-				y: 50,
-				opacity: 0,
-				duration: 0.8,
-				stagger: 0.15,
-				ease: "power3.out",
-			});
 		},
 		{ scope: containerRef },
 	);

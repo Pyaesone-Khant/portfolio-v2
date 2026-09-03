@@ -88,33 +88,10 @@ export default function SelectedWorks() {
 						invalidateOnRefresh: true,
 					},
 				});
-
-				// Stagger entrance animation
-				gsap.from(".project-card", {
-					scrollTrigger: {
-						trigger: containerRef.current,
-						start: "top 75%",
-					},
-					y: 100,
-					opacity: 0,
-					duration: 0.8,
-					stagger: 0.15,
-					ease: "power3.out",
-				});
 			});
 
 			mm.add("(max-width: 767px)", () => {
-				gsap.from(".project-card", {
-					scrollTrigger: {
-						trigger: wrapper,
-						start: "top 85%",
-					},
-					y: 50,
-					opacity: 0,
-					duration: 0.8,
-					stagger: 0.2,
-					ease: "power3.out",
-				});
+				// No GSAP scroll trigger for mobile to prevent layout jumping
 			});
 
 			return () => mm.revert();

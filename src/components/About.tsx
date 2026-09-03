@@ -28,19 +28,7 @@ import TechMarquee from './TechMarquee';
 export default function About() {
   const container = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    gsap.from('.bento-item', {
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'top 80%',
-      },
-      y: 100,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: 'power3.out'
-    });
-  }, { scope: container });
+  // Stagger animation removed to prevent ScrollTrigger layout jumps
 
   const iconClass = "text-4xl text-zinc-400 hover:text-white transition-colors mx-4";
 
