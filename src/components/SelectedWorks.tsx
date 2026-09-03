@@ -8,40 +8,40 @@ import { ArrowUpRight } from "lucide-react";
 
 const projects = [
 	{
-		title: "Dhamma Aung Lan",
+		title: "Dhamma Aung Lan Admin",
 		description:
-			"A high-performance cross-platform Admin Panel for Web and Desktop using React and Electron.",
-		tags: ["React", "Electron", "TanStack Query"],
+			"A comprehensive administrative panel engineered for cross-platform compatibility across Web and native Desktop environments. By bridging these ecosystems, the platform provides seamless content management and operational control. The architecture leverages AI-native workflows to automate complex data-fetching logic and rapidly prototype intuitive UI components, resulting in significantly accelerated delivery cycles.",
+		tags: ["React", "Electron", "TanStack Query", "Cross-Platform", "AI-Native Workflow"],
 		color: "from-orange-500/20 to-transparent border-orange-500/20 hover:border-orange-500/50",
 		logoUrl: "/logos/dhamha_aung_lan_logo.png",
-		url: "#", 
+		url: "https://github.com/Pyaesone-Khant/dhamha-aung-lan-admin", 
 	},
 	{
 		title: "Rangoon Success Academy",
 		description:
-			"An SEO-first educational platform optimized for Core Web Vitals and organic growth.",
-		tags: ["Next.js", "SSR", "Tailwind"],
+			"A premier e-learning platform designed to empower professionals and entrepreneurs with expert-led sales and marketing strategies. Architected from the ground up with an SEO-first philosophy using Server-Side Rendering. This strategic technical approach drives significant organic traffic growth while maintaining optimized Core Web Vitals to ensure a flawless, fast learning experience.",
+		tags: ["Next.js", "SSR", "SEO Optimization", "E-Learning", "Core Web Vitals"],
 		color: "from-blue-500/20 to-transparent border-blue-500/20 hover:border-blue-500/50",
 		logoUrl: "/logos/rangoon_success_academy.png",
-		url: "#",
+		url: "https://rangoonsuccessacademy.com/",
 	},
 	{
 		title: "SarPhat Publishing",
 		description:
-			"Lightning-fast publishing platform handling high-volume content with strategic SEO tuning.",
-		tags: ["Next.js", "Zustand", "SEO"],
+			"A vibrant social reading and online publishing platform connecting writers with a massive reader base. Navigating complex application states, the platform allows authors to seamlessly publish and monetize their work. Strategic technical SEO audits and performance tuning ensure lightning-fast load times and maximum discoverability for an ever-growing library of high-volume literary content.",
+		tags: ["Next.js", "Zustand", "XState", "SWR", "Technical SEO"],
 		color: "from-purple-500/20 to-transparent border-purple-500/20 hover:border-purple-500/50",
 		logoUrl: "/logos/sarphat.png",
-		url: "#",
+		url: "https://www.sarphat.com/",
 	},
 	{
-		title: "Panora Bookshop",
+		title: "Panora Myanmar",
 		description:
-			"Revitalized e-commerce experience with RTK Query for streamlined server-state synchronization.",
-		tags: ["Next.js", "RTK Query", "E-commerce"],
+			"A comprehensive 24/7 online bookstore and publishing house operating as a unified application. The platform categorizes a vast inventory of books, providing users with detailed previews. The e-commerce experience was completely revitalized using advanced state management to drastically reduce client-side overhead and streamline server-state synchronization, resulting in a highly responsive shopping environment.",
+		tags: ["Next.js", "RTK Query", "E-Commerce", "Performance Optimization"],
 		color: "from-emerald-500/20 to-transparent border-emerald-500/20 hover:border-emerald-500/50",
 		logoUrl: "/logos/panora.svg",
-		url: "#",
+		url: "https://www.panoramyanmar.com/",
 	},
 ];
 
