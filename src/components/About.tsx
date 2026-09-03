@@ -3,6 +3,14 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import TechMarquee from './TechMarquee';
+import { 
+  SiTypescript, SiReact, SiNextdotjs, SiElectron, SiTauri, SiRedux, 
+  SiNodedotjs, SiNestjs, SiRust, SiExpress,
+  SiAmazonwebservices, SiGooglecloud, SiDigitalocean, SiDocker,
+  SiPostgresql, SiMysql, SiMongodb
+} from 'react-icons/si';
+import { VscVscodeInsiders } from 'react-icons/vsc'; // Using as a proxy for Cursor/AI IDE
 
 export default function About() {
   const container = useRef<HTMLDivElement>(null);
@@ -21,38 +29,74 @@ export default function About() {
     });
   }, { scope: container });
 
+  const iconClass = "text-4xl text-zinc-400 hover:text-white transition-colors mx-4";
+
   return (
     <section ref={container} className="min-h-screen py-24 px-4 md:px-12 max-w-7xl mx-auto bento-container">
       <h2 className="text-3xl md:text-5xl font-semibold mb-12 tracking-tight">About & Expertise</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
         {/* Frontend Architecture */}
-        <div className="bento-item col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
-          <h3 className="text-2xl font-medium">Frontend Architecture</h3>
+        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+          <div className="absolute top-8 left-0 right-0">
+            <TechMarquee speed="normal">
+              <SiTypescript className={iconClass} />
+              <SiReact className={iconClass} />
+              <SiNextdotjs className={iconClass} />
+              <SiRedux className={iconClass} />
+              <SiElectron className={iconClass} />
+              <SiTauri className={iconClass} />
+            </TechMarquee>
+          </div>
+          <h3 className="text-2xl font-medium mt-auto">Frontend Architecture</h3>
           <p className="text-zinc-500 mt-2">
             TypeScript, React, Next.js, TanStack Query, Zustand, RTK Query. Bridging web and desktop with Electron and Tauri.
           </p>
         </div>
 
         {/* Backend Architecture */}
-        <div className="bento-item col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
-          <h3 className="text-2xl font-medium">Backend Systems</h3>
+        <div className="bento-item relative overflow-hidden col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+          <div className="absolute top-8 left-0 right-0">
+            <TechMarquee speed="slow" reverse>
+              <SiNodedotjs className={iconClass} />
+              <SiNestjs className={iconClass} />
+              <SiRust className={iconClass} />
+              <SiExpress className={iconClass} />
+            </TechMarquee>
+          </div>
+          <h3 className="text-2xl font-medium mt-auto">Backend Systems</h3>
           <p className="text-zinc-500 mt-2">
             Node.js, NestJS, Rust, TypeORM, and robust REST APIs.
           </p>
         </div>
 
         {/* Cloud & Infrastructure */}
-        <div className="bento-item col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
-          <h3 className="text-2xl font-medium">Cloud & Ops</h3>
+        <div className="bento-item relative overflow-hidden col-span-1 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+          <div className="absolute top-8 left-0 right-0">
+            <TechMarquee speed="fast">
+              <SiAmazonwebservices className={iconClass} />
+              <SiGooglecloud className={iconClass} />
+              <SiDigitalocean className={iconClass} />
+              <SiDocker className={iconClass} />
+            </TechMarquee>
+          </div>
+          <h3 className="text-2xl font-medium mt-auto">Cloud & Ops</h3>
           <p className="text-zinc-500 mt-2">
             Deploying and scaling with AWS (ECS, S3), GCP, and Digital Ocean.
           </p>
         </div>
 
         {/* Databases & Workflow */}
-        <div className="bento-item col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
-          <h3 className="text-2xl font-medium">Databases & AI Workflow</h3>
+        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+          <div className="absolute top-8 left-0 right-0">
+            <TechMarquee speed="normal" reverse>
+              <SiPostgresql className={iconClass} />
+              <SiMysql className={iconClass} />
+              <SiMongodb className={iconClass} />
+              <VscVscodeInsiders className={iconClass} />
+            </TechMarquee>
+          </div>
+          <h3 className="text-2xl font-medium mt-auto">Databases & AI Workflow</h3>
           <p className="text-zinc-500 mt-2">
             PostgreSQL, MySQL, MongoDB. Consistently achieving rapid delivery cycles using AI-native workflows (Cursor, Antigravity).
           </p>
