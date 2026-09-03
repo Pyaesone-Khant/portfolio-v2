@@ -28,6 +28,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
+  a, button {
+    cursor: none !important;
+  }
+}
+
+@keyframes color-cycle {
+  0%, 100% { color: #a1a1aa; /* zinc-400 */ }
+  50% { color: #ffffff; /* white */ }
+}
+
+.animate-basic-color {
+  animation: color-cycle 4s ease-in-out infinite;
+}
+
 /* GSAP Smooth Scroll Support */
 html.lenis, html.lenis body {
   height: auto;
