@@ -64,15 +64,19 @@ export default function TechMarquee({
         ref={track}
         className={cn("flex w-max min-w-full items-center")}
       >
-        <div className="flex gap-4 px-2 w-1/2 justify-around items-center">
-          {children}
-          {children}
-          {children}
+        {/* First Half */}
+        <div className="flex items-center shrink-0">
+          <div className="flex gap-4 px-2">{children}</div>
+          <div className="flex gap-4 px-2">{children}</div>
+          <div className="flex gap-4 px-2">{children}</div>
+          <div className="flex gap-4 px-2">{children}</div>
         </div>
-        <div className="flex gap-4 px-2 w-1/2 justify-around items-center">
-          {children}
-          {children}
-          {children}
+        {/* Second Half (Exact Copy) */}
+        <div className="flex items-center shrink-0">
+          <div className="flex gap-4 px-2">{children}</div>
+          <div className="flex gap-4 px-2">{children}</div>
+          <div className="flex gap-4 px-2">{children}</div>
+          <div className="flex gap-4 px-2">{children}</div>
         </div>
       </div>
     </div>
