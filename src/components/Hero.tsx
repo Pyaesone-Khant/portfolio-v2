@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import MagneticButton from './MagneticButton';
 
 function HeroShape() {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -24,16 +24,25 @@ function HeroShape() {
 
   return (
     <Float floatIntensity={2} rotationIntensity={0.5} speed={2}>
-      <mesh ref={meshRef}>
-        <torusKnotGeometry args={[1, 0.3, 64, 16]} />
-        <MeshTransmissionMaterial 
-          thickness={0.5}
-          roughness={0.1}
-          transmission={1}
-          ior={1.5}
-          chromaticAberration={0.05}
-        />
-      </mesh>
+      <group ref={meshRef}>
+        {/* Outer Glass Shell */}
+        <mesh>
+          <icosahedronGeometry args={[1.2, 0]} />
+          <MeshTransmissionMaterial 
+            thickness={0.5}
+            roughness={0.1}
+            transmission={1}
+            ior={1.5}
+            chromaticAberration={0.05}
+          />
+        </mesh>
+        
+        {/* Inner Tech Core */}
+        <mesh>
+          <icosahedronGeometry args={[0.5, 0]} />
+          <meshStandardMaterial color="#61DAFB" wireframe />
+        </mesh>
+      </group>
     </Float>
   );
 }
