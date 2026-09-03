@@ -4,7 +4,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import MagneticButton from "./MagneticButton";
-import { Github, Linkedin, Mail, Download } from "lucide-react";
+import { Mail, Download } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -76,7 +77,7 @@ export default function Footer() {
 							className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 group"
 						>
 							<div className="p-2 bg-zinc-900 rounded-full group-hover:bg-blue-600 transition-colors">
-								<Linkedin size={18} />
+								<FaLinkedin size={18} />
 							</div>
 							<span className="text-sm font-medium">LinkedIn</span>
 						</a>
@@ -87,7 +88,7 @@ export default function Footer() {
 							className="text-zinc-400 hover:text-white transition-colors flex items-center gap-2 group"
 						>
 							<div className="p-2 bg-zinc-900 rounded-full group-hover:bg-zinc-700 transition-colors">
-								<Github size={18} />
+								<FaGithub size={18} />
 							</div>
 							<span className="text-sm font-medium">GitHub</span>
 						</a>
