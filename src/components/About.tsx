@@ -7,6 +7,7 @@ import { FaAws } from 'react-icons/fa';
 import {
   SiDigitalocean, SiDocker,
   SiElectron,
+  SiExpo,
   SiExpress,
   SiGooglecloud,
   SiMongodb,
@@ -55,14 +56,15 @@ export default function About() {
               <SiTypescript className={iconClass} />
               <SiReact className={iconClass} />
               <SiNextdotjs className={iconClass} />
+              <SiExpo className={iconClass} />
               <SiRedux className={iconClass} />
               <SiElectron className={iconClass} />
               <SiTauri className={iconClass} />
             </TechMarquee>
           </div>
-          <h3 className="text-2xl font-medium mt-auto">Frontend Architecture</h3>
+          <h3 className="text-2xl font-medium mt-auto">Frontend & Mobile Architecture</h3>
           <p className="text-zinc-500 mt-2">
-            TypeScript, React, Next.js, TanStack Query, Zustand, RTK Query. Bridging web and desktop with Electron and Tauri.
+            TypeScript, React, Next.js, React Native, Expo, Zustand. Bridging web, mobile, and desktop ecosystems.
           </p>
         </div>
 
