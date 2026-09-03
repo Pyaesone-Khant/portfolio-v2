@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -84,6 +85,23 @@ export default function SelectedWorks() {
 				stagger: 0.1,
 				ease: "power4.out",
 			});
+
+			// Smoothly hide the title when the last card comes into view
+			const cards = document.querySelectorAll(".project-card");
+			if (cards.length > 0) {
+				const lastCard = cards[cards.length - 1];
+
+				gsap.to(".works-title-container", {
+					y: -100,
+					opacity: 0,
+					scrollTrigger: {
+						trigger: lastCard,
+						start: "top 20%",
+						end: "bottom 60%",
+						scrub: true,
+					},
+				});
+			}
 		},
 		{ scope: container },
 	);
@@ -92,9 +110,9 @@ export default function SelectedWorks() {
 		<section
 			ref={container}
 			id="works-section"
-			className="w-full bg-black text-white relative py-24 md:py-32 z-10"
+			className="min-h-screen w-full bg-black text-white relative py-24 md:py-32 z-10"
 		>
-			<div className="max-w-7xl mx-auto w-full px-4 md:px-12 mb-10">
+			<div className="works-title-container max-w-7xl mx-auto w-full px-4 md:px-12 mb-10 md:mb-24 sticky top-20 md:top-24 z-0">
 				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
 					{title.split(" ").map((word, i) => (
 						<span
@@ -110,16 +128,14 @@ export default function SelectedWorks() {
 			</div>
 
 			{/* Added massive pb-[70vh] so the sticky stack persists on screen before footer scrolls in */}
-			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 relative">
+			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 md:pb-[10vh] pb-[5vh] relative">
 				{projects.map((project, index) => {
 					return (
 						<div
 							key={index}
-							className="project-card sticky w-full mb-12 md:mb-24"
-							style={{
-								top: `calc(15vh + ${index * 40}px)`,
-								zIndex: index + 1,
-							}}
+							className={cn(
+								`project-card sticky w-full mb-12 md:mb-24 md:top-[calc(20vh+sibling-index()*40px)] top-[calc(12vh+sibling-index()*40px)] z-[sibling-index()+1]`,
+							)}
 						>
 							<a
 								href={project.url}
