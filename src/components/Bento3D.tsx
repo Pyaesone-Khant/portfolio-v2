@@ -1,49 +1,102 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { Draggable } from 'gsap/Draggable';
+import { SiReact, SiNextdotjs, SiTypescript, SiRust, SiNodedotjs, SiTailwindcss, SiNestjs } from "react-icons/si";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Draggable);
+}
+
+const techs = [
+  { name: "React", icon: SiReact, color: "text-[#61DAFB]", bg: "bg-[#61DAFB]/10", border: "border-[#61DAFB]/30" },
+  { name: "Next.js", icon: SiNextdotjs, color: "text-white", bg: "bg-white/10", border: "border-white/30" },
+  { name: "TypeScript", icon: SiTypescript, color: "text-[#3178C6]", bg: "bg-[#3178C6]/10", border: "border-[#3178C6]/30" },
+  { name: "Rust", icon: SiRust, color: "text-[#DEA584]", bg: "bg-[#DEA584]/10", border: "border-[#DEA584]/30" },
+  { name: "Node.js", icon: SiNodedotjs, color: "text-[#339933]", bg: "bg-[#339933]/10", border: "border-[#339933]/30" },
+  { name: "Tailwind", icon: SiTailwindcss, color: "text-[#06B6D4]", bg: "bg-[#06B6D4]/10", border: "border-[#06B6D4]/30" },
+];
 
 export default function Bento3D() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const orbRef = useRef<HTMLDivElement>(null);
+  
+  useGSAP(() => {
+    // Randomly position the tech pills
+    const pills = gsap.utils.toArray('.tech-pill');
+    
+    pills.forEach((pill: any, i) => {
+      // Set initial random position
+      gsap.set(pill, {
+        x: (Math.random() - 0.5) * 200,
+        y: (Math.random() - 0.5) * 200,
+        scale: 0,
+        opacity: 0,
+      });
 
-  useEffect(() => {
-    const container = containerRef.current;
-    const orb = orbRef.current;
-    if (!container || !orb) return;
+      // Animate them in
+      gsap.to(pill, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: "back.out(1.5)",
+        delay: i * 0.1,
+      });
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      // Move orb to mouse position smoothly
-      orb.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-    };
+      // Add floating animation
+      gsap.to(pill, {
+        y: "+=15",
+        rotation: () => (Math.random() - 0.5) * 10,
+        duration: 2 + Math.random(),
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: Math.random() * 2
+      });
+    });
 
-    container.addEventListener('mousemove', handleMouseMove);
-    return () => container.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    // Make them draggable
+    Draggable.create(".tech-pill", {
+      bounds: containerRef.current,
+      edgeResistance: 0.65,
+      type: "x,y",
+      onPress: function() {
+        gsap.to(this.target, { scale: 1.1, duration: 0.2 });
+      },
+      onRelease: function() {
+        gsap.to(this.target, { scale: 1, duration: 0.2, ease: "back.out(2)" });
+      }
+    });
+  }, { scope: containerRef });
 
   return (
-    <div 
-      ref={containerRef}
-      className="absolute inset-0 z-0 overflow-hidden pointer-events-auto bg-zinc-900"
-    >
-      {/* Grid Pattern Background */}
-      <div className="absolute inset-0 opacity-[0.15]" 
-           style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} 
-      />
+    <div ref={containerRef} className="absolute inset-0 w-full h-full bg-zinc-950 overflow-hidden flex items-center justify-center pointer-events-auto">
+      {/* Background animated gradient mesh */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black blur-2xl pointer-events-none" />
       
-      {/* Interactive Glowing Orb */}
-      <div 
-        ref={orbRef}
-        className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-blue-500/30 blur-[60px] transition-opacity duration-500 opacity-50 group-hover:opacity-100 mix-blend-screen pointer-events-none"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      />
+      {/* Grid lines */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      {/* Abstract geometric shapes (pure CSS) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-zinc-700/50 rounded-full animate-[spin_10s_linear_infinite]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-dashed border-zinc-700/30 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+      {techs.map((tech) => (
+        <div
+          key={tech.name}
+          className={`tech-pill absolute p-4 rounded-3xl ${tech.bg} ${tech.border} backdrop-blur-xl border shadow-2xl cursor-grab active:cursor-grabbing flex flex-col items-center justify-center gap-3 w-24 h-24 sm:w-28 sm:h-28 z-10`}
+        >
+          <tech.icon size={32} className={tech.color} />
+          <span className="text-[10px] sm:text-xs font-bold text-zinc-300 tracking-wider uppercase">{tech.name}</span>
+        </div>
+      ))}
+
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none z-0">
+        <span className="text-zinc-500 text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2 bg-black/50 px-4 py-1.5 rounded-full backdrop-blur-md">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
+          </span>
+          Drag to play
+        </span>
+      </div>
     </div>
   );
 }

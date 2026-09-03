@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 import { FaAws } from 'react-icons/fa';
 import {
   SiDigitalocean, SiDocker,
@@ -24,8 +24,8 @@ import {
   SiTypescript
 } from 'react-icons/si';
 import { VscVscodeInsiders } from 'react-icons/vsc'; // Using as a proxy for Cursor/AI IDE
-import TechMarquee from './TechMarquee';
 import Bento3D from './Bento3D';
+import TechMarquee from './TechMarquee';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,11 +69,6 @@ export default function About() {
         {/* 3D Interactive Element */}
         <div className="group relative w-full max-w-md aspect-square md:aspect-4/3 rounded-[3rem] overflow-hidden bg-zinc-900 border border-zinc-800/50 shadow-2xl">
            <Bento3D />
-           <div className="absolute inset-0 z-10 flex items-end justify-center pb-8 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-             <span className="px-4 py-2 rounded-full bg-zinc-800/80 backdrop-blur-md border border-zinc-700/50 text-zinc-300 uppercase tracking-widest font-bold text-xs shadow-xl">
-               Interactive Engine
-             </span>
-           </div>
         </div>
       </div>
 
