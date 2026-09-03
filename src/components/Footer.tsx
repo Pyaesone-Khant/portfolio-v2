@@ -69,7 +69,7 @@ export default function Footer() {
 
 			<div className="w-full mt-24 z-10">
 				<div className="w-full border-t border-zinc-800" />
-				<div className="max-w-7xl mx-auto px-4 md:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+				<div className="max-w-7xl mx-auto px-4 md:px-12 pt-8 pb-32 md:pb-8 flex flex-col md:flex-row justify-between items-center gap-6">
 					<p className="text-zinc-500 text-sm">
 						© {new Date().getFullYear()} Pyaesone Khant. All rights reserved.
 					</p>
