@@ -77,7 +77,7 @@ export default function Hero() {
           Hi, I'm <span className="animate-basic-color inline-block">Pyaesone Khant</span>
         </h1>
         <p className="hero-text mt-6 text-xl md:text-2xl text-zinc-400 max-w-2xl font-light">
-          I craft minimalist, innovative digital experiences using modern web technologies.
+          A product-focused Software Engineer transforming ambiguous needs into high-performance, scalable solutions.
         </p>
         
         <div className="hero-btn mt-12">
