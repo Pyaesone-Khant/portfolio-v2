@@ -1,10 +1,7 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
 
 const projects = [
 	{
@@ -64,123 +61,81 @@ const projects = [
 ];
 
 export default function SelectedWorks() {
-	const containerRef = useRef<HTMLDivElement>(null);
-	const scrollWrapperRef = useRef<HTMLDivElement>(null);
-
-	useGSAP(
-		() => {
-			const wrapper = scrollWrapperRef.current;
-			if (!wrapper) return;
-
-			// Use matchMedia to only apply the horizontal scroll on desktop
-			const mm = gsap.matchMedia();
-
-			mm.add("(min-width: 768px)", () => {
-				// Horizontal scroll animation
-				gsap.to(wrapper, {
-					x: () => -(wrapper.scrollWidth - window.innerWidth),
-					ease: "none",
-					scrollTrigger: {
-						trigger: containerRef.current,
-						pin: true,
-						scrub: 1,
-						end: () => "+=" + (wrapper.scrollWidth - window.innerWidth),
-						invalidateOnRefresh: true,
-					},
-				});
-			});
-
-			mm.add("(max-width: 767px)", () => {
-				// No GSAP scroll trigger for mobile to prevent layout jumping
-			});
-
-			return () => mm.revert();
-		},
-		{ scope: containerRef },
-	);
-
 	return (
 		<section
-			ref={containerRef}
 			id="works-section"
-			className="min-h-screen md:h-screen w-full md:overflow-hidden bg-zinc-950 text-white relative flex flex-col justify-center py-32 md:py-0"
+			className="min-h-screen w-full bg-zinc-950 text-white relative py-24 md:py-32"
 		>
-			{/* Header aligned with the max-w-7xl of other components */}
-			<div className="md:absolute md:top-12 left-0 right-0 w-full z-10 pointer-events-none mb-12 md:mb-0">
-				<div className="max-w-7xl mx-auto w-full px-4 md:px-12">
-					<h2 className="text-4xl md:text-6xl font-bold tracking-tighter mix-blend-difference">
-						Recent Works
-					</h2>
-				</div>
+			<div className="max-w-7xl mx-auto w-full px-4 md:px-12 mb-16 md:mb-24">
+				<h2 className="text-4xl md:text-6xl font-bold tracking-tighter">
+					Recent Works
+				</h2>
 			</div>
 
-			<div
-				ref={scrollWrapperRef}
-				// Padding left calculation to perfectly align the first card with max-w-7xl mx-auto px-12
-				className="flex flex-col md:flex-row md:h-[70vh] w-full md:w-max px-4 md:pl-12 lg:pl-[calc((100vw-80rem)/2+3rem)] md:pr-[50vw] gap-8 md:gap-0"
-			>
+			<div className="flex flex-col w-full max-w-7xl mx-auto px-4 md:px-12 gap-8 md:gap-12 pb-32">
 				{projects.map((project, index) => {
 					return (
 						<div
 							key={index}
-							className="project-card w-full md:w-[65vw] lg:w-[50vw] max-w-3xl md:h-full shrink-0 flex items-center md:mr-12 lg:mr-16"
+							className="project-card sticky w-full flex items-center justify-center transition-all duration-700"
+							style={{ 
+								top: `calc(15vh + ${index * 40}px)`, 
+								zIndex: index + 1 
+							}}
 						>
 							<a
 								href={project.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`group relative w-full h-full rounded-[2.5rem] border bg-linear-to-br bg-zinc-900/50 p-6 md:p-10 flex flex-col justify-between overflow-hidden backdrop-blur-md transition-all duration-500 hover:-translate-y-2 ${project.color}`}
+								className={`group relative w-full rounded-[2.5rem] md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
 							>
-								{/* Animated Background Blob */}
-								<div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-white opacity-0 md:group-hover:opacity-5 transition-opacity duration-700 rounded-full blur-3xl pointer-events-none" />
-
-								{/* Top section: Title and Floating Icon */}
-								<div className="flex justify-between items-start gap-4">
-									<div className="flex-1">
-										<h3 className="text-2xl md:text-4xl lg:text-5xl font-semibold mb-3 md:mb-4 tracking-tight">
+								{/* Content Left */}
+								<div className="flex-1 flex flex-col justify-between z-10">
+									<div>
+										<h3 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 tracking-tight">
 											{project.title}
 										</h3>
-										<p className="text-sm md:text-lg text-zinc-400 max-w-lg leading-relaxed md:group-hover:text-zinc-300 transition-colors">
+										<p className="text-base md:text-xl text-zinc-400 max-w-2xl leading-relaxed">
 											{project.description}
 										</p>
 									</div>
 
-									<div className="relative md:size-20 size-16 aspect-square shrink-0 rounded-2xl overflow-hidden bg-zinc-800/50 border border-zinc-700/50 md:group-hover:scale-110 md:group-hover:border-zinc-500/50 transition-all duration-500 flex items-center justify-center p-1.5 hidden sm:flex">
-										<Image
-											src={project.logoUrl}
-											alt={`${project.title} logo`}
-											width={80}
-											height={80}
-											className="object-contain"
-										/>
-									</div>
-								</div>
-
-								{/* Bottom section: Tags and Link Arrow */}
-								<div className="flex flex-col sm:flex-row items-start justify-between gap-6 mt-8">
-									<div className="flex flex-wrap gap-2 flex-1">
+									<div className="flex flex-wrap gap-2 md:gap-3 mt-12 md:mt-16">
 										{project.tags.map((tag) => (
 											<span
 												key={tag}
-												className="px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-zinc-800/50 text-xs md:text-sm font-medium border border-zinc-700/50 text-zinc-300"
+												className="px-4 py-2 rounded-full bg-zinc-800/80 text-xs md:text-sm font-medium border border-zinc-700/50 text-zinc-300 backdrop-blur-md"
 											>
 												{tag}
 											</span>
 										))}
 									</div>
+								</div>
 
-									<div className="flex items-center gap-2 text-sm font-medium sm:opacity-0 sm:translate-x-4 md:group-hover:opacity-100 md:group-hover:translate-x-0 transition-all duration-500 w-full sm:w-auto justify-between sm:justify-start">
-										<span className="uppercase tracking-widest text-zinc-400">
-											View Site
+								{/* Content Right (Logo & CTA) */}
+								<div className="flex flex-col items-start md:items-end justify-between z-10 gap-8">
+									<div className="relative size-24 md:size-32 shrink-0 rounded-3xl overflow-hidden bg-zinc-800 border border-zinc-700/50 group-hover:scale-110 group-hover:border-zinc-500/50 transition-all duration-500 flex items-center justify-center p-4 shadow-xl">
+										<Image
+											src={project.logoUrl}
+											alt={`${project.title} logo`}
+											width={120}
+											height={120}
+											className="object-contain"
+										/>
+									</div>
+
+									<div className="flex items-center gap-3 text-sm font-medium opacity-100 md:opacity-0 md:-translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500">
+										<span className="uppercase tracking-widest text-zinc-300 font-bold">
+											Visit Platform
 										</span>
-										<div className="p-2 rounded-full bg-white text-black">
-											<ArrowUpRight
-												size={16}
-												strokeWidth={2}
-											/>
+										<div className="p-3 rounded-full bg-white text-black shadow-lg group-hover:scale-110 transition-transform">
+											<ArrowUpRight size={20} strokeWidth={2.5} />
 										</div>
 									</div>
 								</div>
+
+								{/* Massive Background Glow */}
+								<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white opacity-0 md:group-hover:opacity-[0.03] transition-opacity duration-700 rounded-full blur-[100px] pointer-events-none" />
 							</a>
 						</div>
 					);
