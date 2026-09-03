@@ -76,6 +76,7 @@ export default function SelectedWorks() {
 			let mm = gsap.matchMedia();
 
 			mm.add("(min-width: 768px)", () => {
+				// Horizontal scroll animation
 				gsap.to(wrapper, {
 					x: () => -(wrapper.scrollWidth - window.innerWidth),
 					ease: "none",
@@ -86,6 +87,33 @@ export default function SelectedWorks() {
 						end: () => "+=" + (wrapper.scrollWidth - window.innerWidth),
 						invalidateOnRefresh: true,
 					},
+				});
+
+				// Stagger entrance animation
+				gsap.from(".project-card", {
+					scrollTrigger: {
+						trigger: containerRef.current,
+						start: "top 75%",
+					},
+					y: 100,
+					opacity: 0,
+					duration: 0.8,
+					stagger: 0.15,
+					ease: "power3.out",
+				});
+			});
+
+			mm.add("(max-width: 767px)", () => {
+				gsap.from(".project-card", {
+					scrollTrigger: {
+						trigger: wrapper,
+						start: "top 85%",
+					},
+					y: 50,
+					opacity: 0,
+					duration: 0.8,
+					stagger: 0.2,
+					ease: "power3.out",
 				});
 			});
 

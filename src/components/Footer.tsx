@@ -24,6 +24,18 @@ export default function Footer() {
 			scale: 0.9,
 			ease: "power3.out",
 		});
+
+		gsap.from(".footer-stagger", {
+			scrollTrigger: {
+				trigger: containerRef.current,
+				start: "top 75%",
+			},
+			y: 50,
+			opacity: 0,
+			duration: 0.8,
+			stagger: 0.15,
+			ease: "power3.out",
+		});
 	}, { scope: containerRef });
 
 	return (
@@ -34,16 +46,16 @@ export default function Footer() {
 		>
 			<div className="max-w-7xl w-full px-4 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-12 z-10">
 				<div>
-					<h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
+					<h2 className="footer-stagger text-5xl md:text-7xl font-bold tracking-tighter mb-6">
 						Ready to build <br />
 						<span className="text-zinc-500">something innovative?</span>
 					</h2>
-					<p className="text-xl text-zinc-400 max-w-md">
+					<p className="footer-stagger text-xl text-zinc-400 max-w-md">
 						I'm always open to discussing frontend architecture, creative coding, or partnership opportunities.
 					</p>
 				</div>
 				
-				<div className="flex flex-col sm:flex-row items-start md:items-end gap-4 w-full md:w-auto">
+				<div className="footer-stagger flex flex-col sm:flex-row items-start md:items-end gap-4 w-full md:w-auto">
 					<MagneticButton 
             href="mailto:pyaesonekhant.dev@gmail.com"
             className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-none px-6 py-4 md:px-8 md:py-5 text-base font-semibold rounded-full group shadow-2xl shadow-white/10"
