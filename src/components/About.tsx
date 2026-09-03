@@ -1,6 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaAws } from 'react-icons/fa';
 import {
   SiDigitalocean, SiDocker,
@@ -22,15 +25,40 @@ import {
 } from 'react-icons/si';
 import { VscVscodeInsiders } from 'react-icons/vsc'; // Using as a proxy for Cursor/AI IDE
 import TechMarquee from './TechMarquee';
+import Bento3D from './Bento3D';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const container = useRef<HTMLDivElement>(null);
 
+  useGSAP(() => {
+    gsap.from('.about-word', {
+      scrollTrigger: {
+        trigger: container.current,
+        start: 'top 80%',
+      },
+      y: '120%',
+      opacity: 0,
+      rotationZ: 10,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power4.out'
+    });
+  }, { scope: container });
+
   const iconClass = "text-4xl text-zinc-400 hover:text-white transition-colors mx-4";
+  const title = "About & Expertise";
 
   return (
     <section id="about-section" ref={container} className="min-h-dvh py-24 px-4 md:px-12 max-w-7xl mx-auto bento-container">
-      <h2 className="text-3xl md:text-5xl font-semibold mb-12 tracking-tight">About & Expertise</h2>
+      <h2 className="text-3xl md:text-5xl font-semibold mb-12 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
+        {title.split(" ").map((word, i) => (
+          <span key={i} className="overflow-hidden inline-flex pb-2">
+            <span className="about-word inline-block origin-bottom-left">{word}</span>
+          </span>
+        ))}
+      </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[250px]">
         {/* Frontend Architecture */}
@@ -85,8 +113,9 @@ export default function About() {
         </div>
 
         {/* Databases & Workflow */}
-        <div className="bento-item relative overflow-hidden col-span-1 md:col-span-2 lg:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
-          <div className="absolute top-8 left-0 right-0">
+        <div className="bento-item group relative overflow-hidden col-span-1 md:col-span-2 lg:col-span-2 bg-zinc-100 dark:bg-zinc-900 rounded-3xl p-8 flex flex-col justify-end border border-zinc-200 dark:border-zinc-800">
+          <Bento3D />
+          <div className="absolute top-8 left-0 right-0 z-10">
             <TechMarquee speed="normal" reverse>
               <SiPostgresql className={iconClass} />
               <SiMysql className={iconClass} />
@@ -94,8 +123,8 @@ export default function About() {
               <VscVscodeInsiders className={iconClass} />
             </TechMarquee>
           </div>
-          <h3 className="text-2xl font-medium mt-auto">Databases & AI Workflow</h3>
-          <p className="text-zinc-500 mt-2">
+          <h3 className="text-2xl font-medium mt-auto z-10">Databases & AI Workflow</h3>
+          <p className="text-zinc-500 mt-2 z-10">
             PostgreSQL, MySQL, MongoDB. Consistently achieving rapid delivery cycles using AI-native workflows (Cursor, Antigravity).
           </p>
         </div>
