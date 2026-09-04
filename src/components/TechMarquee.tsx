@@ -1,84 +1,106 @@
-'use client';
+"use client";
 
-import { ReactNode, useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
+import { IconType } from "react-icons";
 
-gsap.registerPlugin(ScrollTrigger);
-
-interface TechMarqueeProps {
-  children: ReactNode;
-  className?: string;
-  speed?: 'fast' | 'normal' | 'slow';
-  reverse?: boolean;
+export interface TechItem {
+	name: string;
+	icon: IconType;
 }
 
-export default function TechMarquee({ 
-  children, 
-  className,
-  speed = 'normal',
-  reverse = false
+interface TechMarqueeProps {
+	items: TechItem[];
+	className?: string;
+	speed?: "fast" | "normal" | "slow";
+	reverse?: boolean;
+}
+
+export default function TechMarquee({
+	items,
+	className,
+	speed = "normal",
+	reverse = false,
 }: TechMarqueeProps) {
-  const track = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const trackRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    let xPercent = 0;
-    let direction = reverse ? 1 : -1;
-    let speedMultiplier = speed === 'fast' ? 1.5 : speed === 'slow' ? 0.5 : 1;
-    
-    // Set initial position if reversing
-    if (reverse) xPercent = -50;
+	useGSAP(() => {
+		// 4 sets total. We animate from 0 to -50% (or -50% to 0).
+		// This perfectly shifts the container by exactly 2 sets, creating a seamless infinite loop.
+		const duration = speed === "fast" ? 10 : speed === "slow" ? 25 : 15;
 
-    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-    
-    const updateX = () => {
-      // Calculate scroll velocity manually
-      let currentScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-      let velocity = currentScrollY - lastScrollY;
-      lastScrollY = currentScrollY;
+		const tween = gsap.fromTo(
+			trackRef.current,
+			{ xPercent: reverse ? -50 : 0 },
+			{
+				xPercent: reverse ? 0 : -50,
+				ease: "none",
+				duration: duration,
+				repeat: -1,
+			},
+		);
 
-      // Cap the velocity multiplier to prevent insanely fast spinning
-      let v = Math.min(Math.abs(velocity / 10), 5);
-      
-      // Base speed + scroll velocity bonus
-      let moveAmount = (0.05 * speedMultiplier + (v * 0.2)) * direction;
-      
-      xPercent += moveAmount;
-      
-      // Seamless loop logic
-      if (xPercent <= -50) xPercent += 50;
-      if (xPercent >= 0) xPercent -= 50;
-      
-      gsap.set(track.current, { xPercent });
-    };
+		const el = containerRef.current;
+		if (!el) return;
 
-    gsap.ticker.add(updateX);
-    return () => gsap.ticker.remove(updateX);
-  }, [speed, reverse]);
+		const pause = () => tween.pause();
+		const play = () => tween.play();
 
-  return (
-    <div className={cn("relative flex w-full overflow-hidden mask-horizontal", className)}>
-      <div 
-        ref={track}
-        className={cn("flex w-max min-w-full items-center")}
-      >
-        {/* First Half */}
-        <div className="flex items-center shrink-0">
-          <div className="flex gap-4 px-2">{children}</div>
-          <div className="flex gap-4 px-2">{children}</div>
-          <div className="flex gap-4 px-2">{children}</div>
-          <div className="flex gap-4 px-2">{children}</div>
-        </div>
-        {/* Second Half (Exact Copy) */}
-        <div className="flex items-center shrink-0">
-          <div className="flex gap-4 px-2">{children}</div>
-          <div className="flex gap-4 px-2">{children}</div>
-          <div className="flex gap-4 px-2">{children}</div>
-          <div className="flex gap-4 px-2">{children}</div>
-        </div>
-      </div>
-    </div>
-  );
+		el.addEventListener("mouseenter", pause);
+		el.addEventListener("mouseleave", play);
+		el.addEventListener("touchstart", pause);
+		el.addEventListener("touchend", play);
+
+		return () => {
+			el.removeEventListener("mouseenter", pause);
+			el.removeEventListener("mouseleave", play);
+			el.removeEventListener("touchstart", pause);
+			el.removeEventListener("touchend", play);
+		};
+	}, [speed, reverse]);
+
+	const renderSet = () => (
+		<div className="flex items-center gap-10 px-5 shrink-0">
+			{items.map((item, idx) => (
+				<div
+					key={idx}
+					className="relative flex flex-col items-center justify-center group cursor-pointer w-16 h-16"
+				>
+					<item.icon className="text-4xl text-zinc-500 group-hover:text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] z-10" />
+
+					{/* Fancy Tooltip */}
+					<div className="absolute -top-10 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none z-20">
+						<span className="bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap shadow-xl border border-zinc-200 uppercase tracking-widest">
+							{item.name}
+						</span>
+						<div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45" />
+					</div>
+				</div>
+			))}
+		</div>
+	);
+
+	return (
+		<div
+			ref={containerRef}
+			className={cn(
+				"relative flex w-full overflow-hidden mask-horizontal",
+				className,
+			)}
+		>
+			<div
+				ref={trackRef}
+				className={cn("flex w-max min-w-full items-center")}
+			>
+				{/* We render 4 sets so it spans ultra-wide monitors easily and loops flawlessly */}
+				{renderSet()}
+				{renderSet()}
+				{renderSet()}
+				{renderSet()}
+			</div>
+		</div>
+	);
 }

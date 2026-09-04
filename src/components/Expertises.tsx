@@ -50,6 +50,37 @@ export default function Expertises() {
   const iconClass = "text-4xl text-zinc-400 hover:text-white transition-colors mx-4";
   const title = "Core Expertises";
 
+  const frontendTech = [
+    { name: "TypeScript", icon: SiTypescript },
+    { name: "React", icon: SiReact },
+    { name: "Next.js", icon: SiNextdotjs },
+    { name: "Expo", icon: SiExpo },
+    { name: "Redux", icon: SiRedux },
+    { name: "Electron", icon: SiElectron },
+    { name: "Tauri", icon: SiTauri },
+  ];
+
+  const backendTech = [
+    { name: "Node.js", icon: SiNodedotjs },
+    { name: "NestJS", icon: SiNestjs },
+    { name: "Rust", icon: SiRust },
+    { name: "Express", icon: SiExpress },
+  ];
+
+  const cloudTech = [
+    { name: "AWS", icon: FaAws },
+    { name: "Google Cloud", icon: SiGooglecloud },
+    { name: "DigitalOcean", icon: SiDigitalocean },
+    { name: "Docker", icon: SiDocker },
+  ];
+
+  const databaseTech = [
+    { name: "PostgreSQL", icon: SiPostgresql },
+    { name: "MySQL", icon: SiMysql },
+    { name: "MongoDB", icon: SiMongodb },
+    { name: "AI Tooling", icon: VscVscodeInsiders },
+  ];
+
   return (
     <section id="expertises-section" ref={container} className="min-h-dvh py-32 px-4 md:px-12 max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 md:gap-24 items-start relative">
       
@@ -84,15 +115,7 @@ export default function Expertises() {
             </div>
             <span className="text-zinc-600 font-mono text-lg font-bold">01</span>
           </div>
-          <TechMarquee speed="normal" className="py-4">
-            <SiTypescript className={iconClass} />
-            <SiReact className={iconClass} />
-            <SiNextdotjs className={iconClass} />
-            <SiExpo className={iconClass} />
-            <SiRedux className={iconClass} />
-            <SiElectron className={iconClass} />
-            <SiTauri className={iconClass} />
-          </TechMarquee>
+          <TechMarquee items={frontendTech} speed="normal" className="pt-12 pb-4 -mt-8" />
         </div>
 
         {/* Backend block */}
@@ -104,12 +127,7 @@ export default function Expertises() {
             </div>
             <span className="text-zinc-600 font-mono text-lg font-bold">02</span>
           </div>
-          <TechMarquee speed="slow" reverse className="py-4">
-            <SiNodedotjs className={iconClass} />
-            <SiNestjs className={iconClass} />
-            <SiRust className={iconClass} />
-            <SiExpress className={iconClass} />
-          </TechMarquee>
+          <TechMarquee items={backendTech} speed="slow" reverse className="pt-12 pb-4 -mt-8" />
         </div>
 
         {/* Cloud block */}
@@ -121,12 +139,7 @@ export default function Expertises() {
             </div>
             <span className="text-zinc-600 font-mono text-lg font-bold">03</span>
           </div>
-          <TechMarquee speed="fast" className="py-4">
-            <FaAws className={iconClass} />
-            <SiGooglecloud className={iconClass} />
-            <SiDigitalocean className={iconClass} />
-            <SiDocker className={iconClass} />
-          </TechMarquee>
+          <TechMarquee items={cloudTech} speed="fast" className="pt-12 pb-4 -mt-8" />
         </div>
 
         {/* Databases block */}
@@ -138,12 +151,7 @@ export default function Expertises() {
             </div>
             <span className="text-zinc-600 font-mono text-lg font-bold">04</span>
           </div>
-          <TechMarquee speed="normal" reverse className="py-4">
-            <SiPostgresql className={iconClass} />
-            <SiMysql className={iconClass} />
-            <SiMongodb className={iconClass} />
-            <VscVscodeInsiders className={iconClass} />
-          </TechMarquee>
+          <TechMarquee items={databaseTech} speed="normal" reverse className="pt-12 pb-4 -mt-8" />
         </div>
 
       </div>
