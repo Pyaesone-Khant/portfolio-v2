@@ -25,49 +25,43 @@ export default function TechMarquee({
 	reverse = false,
 }: TechMarqueeProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const trackRef = useRef<HTMLDivElement>(null);
+	const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-	useGSAP(() => {
-		// 4 sets total. We animate from 0 to -50% (or -50% to 0).
-		// This perfectly shifts the container by exactly 2 sets, creating a seamless infinite loop.
-		const duration = speed === "fast" ? 10 : speed === "slow" ? 25 : 15;
+	useGSAP(
+		() => {
+			const duration = speed === "fast" ? 10 : speed === "slow" ? 25 : 15;
 
-		const tween = gsap.fromTo(
-			trackRef.current,
-			{ xPercent: reverse ? -50 : 0 },
-			{
-				xPercent: reverse ? 0 : -50,
-				ease: "none",
-				duration: duration,
-				repeat: -1,
-			},
-		);
+			// Animate both tracks simultaneously
+			tweenRef.current = gsap.fromTo(
+				".marquee-track",
+				{
+					xPercent: reverse ? -100 : 0,
+				},
+				{
+					xPercent: reverse ? 0 : -100,
+					repeat: -1,
+					duration: duration,
+					ease: "none",
+				},
+			);
+		},
+		{ scope: containerRef, dependencies: [reverse, speed] },
+	);
 
-		const el = containerRef.current;
-		if (!el) return;
+	const handleMouseEnter = () => tweenRef.current?.pause();
+	const handleMouseLeave = () => tweenRef.current?.play();
 
-		const pause = () => tween.pause();
-		const play = () => tween.play();
-
-		el.addEventListener("mouseenter", pause);
-		el.addEventListener("mouseleave", play);
-		el.addEventListener("touchstart", pause);
-		el.addEventListener("touchend", play);
-
-		return () => {
-			el.removeEventListener("mouseenter", pause);
-			el.removeEventListener("mouseleave", play);
-			el.removeEventListener("touchstart", pause);
-			el.removeEventListener("touchend", play);
-		};
-	}, [speed, reverse]);
-
-	const renderSet = () => (
-		<div className="flex items-center gap-10 px-5 shrink-0">
+	const renderSet = (isClone: boolean) => (
+		<div
+			className="marquee-track flex items-center gap-10 px-5 shrink-0"
+			aria-hidden={isClone}
+		>
 			{items.map((item, idx) => (
 				<div
 					key={idx}
 					className="relative flex flex-col items-center justify-center group cursor-pointer w-16 h-16"
+					onMouseEnter={handleMouseEnter}
+					onMouseLeave={handleMouseLeave}
 				>
 					<item.icon className="text-4xl text-zinc-500 group-hover:text-white transition-all duration-300 group-hover:scale-[1.3] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] z-10" />
 
@@ -91,16 +85,11 @@ export default function TechMarquee({
 				className,
 			)}
 		>
-			<div
-				ref={trackRef}
-				className={cn("flex w-max min-w-full items-center")}
-			>
-				{/* We render 4 sets so it spans ultra-wide monitors easily and loops flawlessly */}
-				{renderSet()}
-				{renderSet()}
-				{renderSet()}
-				{renderSet()}
-			</div>
+			{/* We render 4 sets so it spans ultra-wide monitors easily and loops flawlessly */}
+			{renderSet(false)}
+			{renderSet(false)}
+			{renderSet(false)}
+			{renderSet(false)}
 		</div>
 	);
 }
