@@ -1,10 +1,10 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { User, Briefcase, Mail, Home } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
+import { Briefcase, Code, Home, Mail, User } from "lucide-react";
+import { useRef, useState } from "react";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const navItems = [
 	{ id: "hero", icon: Home, selector: "#hero-section" },
 	{ id: "about", icon: User, selector: "#about-section" },
+	{ id: "expertises", icon: Code, selector: "#expertises-section" },
 	{ id: "works", icon: Briefcase, selector: "#works-section" },
 	{ id: "contact", icon: Mail, selector: "#footer-section" },
 ];
@@ -65,7 +66,7 @@ export default function FloatingNav() {
 							"p-3 md:p-4 rounded-full transition-all active:scale-95 duration-300",
 							isActive
 								? "bg-white text-black shadow-lg"
-								: "text-zinc-400 hover:text-white hover:bg-zinc-800"
+								: "text-zinc-400 hover:text-white hover:bg-zinc-800",
 						)}
 						aria-label={`Scroll to ${item.id}`}
 					>

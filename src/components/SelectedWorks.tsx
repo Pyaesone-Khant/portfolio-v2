@@ -111,10 +111,10 @@ export default function SelectedWorks() {
 		<section
 			ref={container}
 			id="works-section"
-			className="min-h-screen w-full bg-black text-white relative py-24 z-10"
+			className="min-h-screen w-full bg-black text-white relative py-32 z-10"
 		>
 			<div className="works-title-container max-w-7xl mx-auto w-full px-4 md:px-12 mb-16 md:mb-24 sticky top-20 md:top-24 z-0">
-				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
+				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight flex flex-wrap gap-x-3 md:gap-x-4 mb-8">
 					{title.split(" ").map((word, i) => (
 						<span
 							key={i}
