@@ -96,7 +96,7 @@ export default function SelectedWorks() {
 					opacity: 0,
 					scrollTrigger: {
 						trigger: lastCard,
-						start: "top 20%",
+						start: "top 40%",
 						end: "bottom 60%",
 						scrub: true,
 					},
@@ -110,7 +110,7 @@ export default function SelectedWorks() {
 		<section
 			ref={container}
 			id="works-section"
-			className="min-h-screen w-full bg-black text-white relative py-24 md:py-32 z-10"
+			className="min-h-screen w-full bg-black text-white relative py-24 z-10"
 		>
 			<div className="works-title-container max-w-7xl mx-auto w-full px-4 md:px-12 mb-10 md:mb-24 sticky top-20 md:top-24 z-0">
 				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
@@ -128,20 +128,20 @@ export default function SelectedWorks() {
 			</div>
 
 			{/* Added massive pb-[10vh] so the sticky stack persists on screen before footer scrolls in */}
-			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 md:pb-[10vh] pb-[5vh] relative">
+			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-[10vh] flex flex-col gap-10 relative">
 				{projects.map((project, index) => {
 					return (
 						<div
 							key={index}
 							className={cn(
-								`project-card sticky w-full mb-12 md:mb-24 md:top-[calc(20vh+sibling-index()*40px)] top-[calc(12vh+sibling-index()*40px)] z-[sibling-index()+1]`,
+								`project-card sticky w-full md:top-[calc(20vh+sibling-index()*28px)] top-[calc(12vh+sibling-index()*28px)] z-[sibling-index()+1]`,
 							)}
 						>
 							<a
 								href={project.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`group relative w-full rounded-[2rem] md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
+								className={`group relative w-full rounded-4xl md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
 							>
 								{/* Content Left */}
 								<div className="flex-1 flex flex-col justify-between z-10">
