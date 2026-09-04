@@ -96,10 +96,11 @@ export default function SelectedWorks() {
 					opacity: 0,
 					scrollTrigger: {
 						trigger: lastCard,
-						start: "top 40%",
-						end: "bottom 60%",
+						start: "top 30%",
+						end: "bottom 45%",
 						scrub: true,
 					},
+					delay: 2,
 				});
 			}
 		},
@@ -112,7 +113,7 @@ export default function SelectedWorks() {
 			id="works-section"
 			className="min-h-screen w-full bg-black text-white relative py-24 z-10"
 		>
-			<div className="works-title-container max-w-7xl mx-auto w-full px-4 md:px-12 mb-10 md:mb-24 sticky top-20 md:top-24 z-0">
+			<div className="works-title-container max-w-7xl mx-auto w-full px-4 md:px-12 mb-16 md:mb-24 sticky top-20 md:top-24 z-0">
 				<h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight flex flex-wrap gap-x-3 md:gap-x-4">
 					{title.split(" ").map((word, i) => (
 						<span
@@ -128,20 +129,20 @@ export default function SelectedWorks() {
 			</div>
 
 			{/* Added massive pb-[10vh] so the sticky stack persists on screen before footer scrolls in */}
-			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-[10vh] flex flex-col gap-10 relative">
+			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-[10vh] flex flex-col gap-20 relative">
 				{projects.map((project, index) => {
 					return (
 						<div
 							key={index}
 							className={cn(
-								`project-card sticky w-full md:top-[calc(20vh+sibling-index()*28px)] top-[calc(12vh+sibling-index()*28px)] z-[sibling-index()+1]`,
+								`project-card sticky w-full md:top-[calc(20vh+sibling-index()*20px)] top-[calc(13vh+sibling-index()*20px)] z-[sibling-index()+1]`,
 							)}
 						>
 							<a
 								href={project.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`group relative w-full rounded-4xl md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
+								className={`group md:h-[70dvh] h-[60dvh] relative w-full rounded-4xl md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
 							>
 								{/* Content Left */}
 								<div className="flex-1 flex flex-col justify-between z-10">
