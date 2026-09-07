@@ -129,7 +129,7 @@ export default function SelectedWorks() {
 			</div>
 
 			{/* Added massive pb-[10vh] so the sticky stack persists on screen before footer scrolls in */}
-			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 pb-[10vh] flex flex-col gap-20 relative">
+			<div className="w-full max-w-7xl mx-auto px-4 md:px-12 flex flex-col gap-20 relative">
 				{projects.map((project, index) => {
 					return (
 						<div
@@ -142,7 +142,7 @@ export default function SelectedWorks() {
 								href={project.url}
 								target="_blank"
 								rel="noopener noreferrer"
-								className={`group md:h-[70dvh] h-[60dvh] relative w-full rounded-4xl md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
+								className={`group min-h-[70dvh] relative w-full rounded-4xl md:rounded-[3rem] border bg-linear-to-br bg-zinc-900 p-6 md:p-12 lg:p-16 flex flex-col md:flex-row justify-between gap-6 md:gap-8 overflow-hidden backdrop-blur-2xl shadow-2xl transition-all duration-500 hover:-translate-y-2 ${project.color}`}
 							>
 								{/* Content Left */}
 								<div className="flex-1 flex flex-col justify-between z-10">
