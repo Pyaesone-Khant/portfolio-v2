@@ -52,7 +52,7 @@ export default function Footer() {
 
 				<div className="footer-stagger flex flex-col sm:flex-row items-start lg:items-end gap-4 w-full lg:w-auto">
 					<MagneticButton
-						href="mailto:pyaesonekhant.dev@gmail.com"
+						href="mailto:pyaesonekhant.fun@gmail.com"
 						className="w-full sm:w-auto bg-white text-black hover:bg-transparent px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-bold tracking-wide rounded-full group shadow-2xl shadow-white/10 transition-all duration-200"
 					>
 						<div className="flex items-center justify-center gap-3 w-full">
