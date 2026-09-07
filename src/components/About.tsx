@@ -164,14 +164,19 @@ export default function About() {
 												2025 - Present
 											</span>
 										</div>
-										<p className="text-base md:text-lg text-zinc-400 font-light leading-relaxed">
-											Architecting modern web and mobile
-											applications using React, Next.js,
-											and complex backend systems.
-											Focusing on performance
-											optimization, scalable
-											infrastructure, and seamless user
-											experiences.
+										<p className="text-base text-zinc-400 font-light leading-relaxed">
+											Architecting the end-to-end
+											development of high-performance web
+											and cross-platform desktop
+											applications. Proven ability to
+											bridge environments using React and
+											Electron, and architect SEO-first
+											Next.js platforms optimized for Core
+											Web Vitals. Consistently achieves
+											30% faster delivery cycles by
+											leveraging AI-native workflows to
+											automate complex data fetching logic
+											and accelerate rapid UI prototyping.
 										</p>
 									</div>
 								</div>
@@ -192,13 +197,18 @@ export default function About() {
 												2023 - 2025
 											</span>
 										</div>
-										<p className="text-base md:text-lg text-zinc-400 font-light leading-relaxed">
-											Collaborated directly with clients
-											to deliver custom software
-											solutions, ranging from E-Commerce
-											platforms to administrative
-											dashboards, handling both frontend
-											UI and backend databases.
+										<p className="text-base text-zinc-400 font-light leading-relaxed">
+											Focused on building and optimizing
+											high-traffic Next.js applications,
+											including the SarPhat Publishing
+											Platform and Panora Online Bookshop.
+											Proven expertise in architecting
+											complex state management solutions
+											(XState, Zustand, RTK Query) and
+											driving technical SEO improvements
+											to maximize platform speed, reduce
+											client-side overhead, and boost
+											content discoverability.
 										</p>
 									</div>
 								</div>
