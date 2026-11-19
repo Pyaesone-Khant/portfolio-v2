@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-v2",
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "portfolio-v2" 
+    }
+  ]
+}
